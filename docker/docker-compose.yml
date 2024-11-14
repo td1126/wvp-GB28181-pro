@@ -13,7 +13,7 @@ services:
     build:
       context: ./wvp
       args:
-        gitUrl: "https://gitee.com/pan648540858"
+        gitUrl: "https://github.com/td1126"
         zlmGitUrl: "https://gitee.com/xia-chu/ZLMediaKit"
     restart: always
     ports:
