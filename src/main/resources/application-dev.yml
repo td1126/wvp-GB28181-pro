@@ -34,7 +34,7 @@ spring:
           driver-class-name: com.mysql.cj.jdbc.Driver
           url: jdbc:mysql://127.0.0.1:3306/wvp2?useUnicode=true&characterEncoding=UTF8&rewriteBatchedStatements=true&serverTimezone=PRC&useSSL=false&allowMultiQueries=true
           username: root
-          password: !MyEMS1
+          password: !MySQL8
           hikari:
             connection-timeout: 20000             # 是客户端等待连接池连接的最大毫秒数
             initialSize: 50                       # 连接池初始化连接数
@@ -76,7 +76,7 @@ sip:
 media:
   id: zlmediakit-local
   # [必须修改] zlm服务器的内网IP
-  ip: 192.168.1.10
+  ip: 127.0.0.1
   # [必须修改] zlm服务器的http.port
   http-port: 9092
   # [必选选] zlm服务器的hook.admin_params=secret
