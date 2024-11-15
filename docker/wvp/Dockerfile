@@ -1,6 +1,6 @@
 FROM ubuntu:20.04   as   build
 
-ARG gitUrl="https://github.com/td1126"
+ARG gitUrl="git@github.com:td1126"
 ARG zlmGitUrl="https://gitee.com/xia-chu/ZLMediaKit"
 
 RUN export DEBIAN_FRONTEND=noninteractive &&\
