@@ -51,6 +51,7 @@ RUN cd /opt/wvp && \
         echo 'nohup /opt/media/MediaServer -d -m 3 &' >> run.sh && \
         echo 'cd /opt/wvp' >> run.sh && \
         echo 'java ${WVP_JVM_CONFIG} -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/opt/wvp/heapdump/ -jar *.jar --spring.config.location=/opt/wvp/config/application.yml --media.record-assist-port=18081 ${WVP_CONFIG}' >> run.sh && \
+        cat run.sh \
         chmod +x run.sh
 
 FROM ubuntu:20.04
