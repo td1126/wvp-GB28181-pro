@@ -1,6 +1,7 @@
 FROM ubuntu:20.04   as   build
 
-ARG gitUrl="git@github.com:td1126"
+ARG gitUrl1="https://gitee.com/pan648540858"
+ARG gitUrl2="git@github.com:td1126"
 ARG zlmGitUrl="https://gitee.com/xia-chu/ZLMediaKit"
 
 RUN export DEBIAN_FRONTEND=noninteractive &&\
@@ -10,11 +11,11 @@ RUN export DEBIAN_FRONTEND=noninteractive &&\
         mkdir -p /opt/wvp/config /opt/wvp/heapdump /opt/wvp/config /opt/assist/config /opt/assist/heapdump /opt/media/www/record
 
 RUN cd /home && \
-        git clone "${gitUrl}/maven.git" && \
+        git clone "${gitUrl1}/maven.git" && \
         cp maven/settings.xml /usr/share/maven/conf/
 
 RUN cd /home && \
-        git clone "${gitUrl}/wvp-GB28181-pro.git"
+        git clone "${gitUrl2}/wvp-GB28181-pro.git"
 RUN cd /home/wvp-GB28181-pro/web_src && \
         npm install && \
         npm run build
@@ -24,7 +25,7 @@ RUN cd /home/wvp-GB28181-pro && \
         cp /home/wvp-GB28181-pro/src/main/resources/application-docker.yml /opt/wvp/config/application.yml
 
 RUN cd /home && \
-		git clone "${gitUrl}/wvp-pro-assist.git"
+		git clone "${gitUrl1}/wvp-pro-assist.git"
 RUN cd /home/wvp-pro-assist && \
 	git reset --hard 58f1a79136a55a7cd1593c95b56ddadcc2225b61 && \
         mvn clean package -Dmaven.test.skip=true && \
@@ -51,7 +52,6 @@ RUN cd /opt/wvp && \
         echo 'nohup /opt/media/MediaServer -d -m 3 &' >> run.sh && \
         echo 'cd /opt/wvp' >> run.sh && \
         echo 'java ${WVP_JVM_CONFIG} -XX:+HeapDumpOnOutOfMemoryError -XX:HeapDumpPath=/opt/wvp/heapdump/ -jar *.jar --spring.config.location=/opt/wvp/config/application.yml --media.record-assist-port=18081 ${WVP_CONFIG}' >> run.sh && \
-        cat run.sh \
         chmod +x run.sh
 
 FROM ubuntu:20.04
