@@ -71,12 +71,12 @@ EXPOSE 30000-30500/udp
 
 ENV LC_ALL zh_CN.UTF-8
 
-#RUN export DEBIAN_FRONTEND=noninteractive &&\
-#        apt-get update && \
-#        apt-get install -y --no-install-recommends openjdk-11-jre ca-certificates ffmpeg language-pack-zh-hans && \
-#        apt-get autoremove -y && \
-#        apt-get clean -y && \
-#        rm -rf /var/lib/apt/lists/*dic
+RUN export DEBIAN_FRONTEND=noninteractive &&\
+        apt-get update && \
+        apt-get install -y --no-install-recommends openjdk-11-jre ca-certificates ffmpeg language-pack-zh-hans && \
+        apt-get autoremove -y && \
+        apt-get clean -y && \
+        rm -rf /var/lib/apt/lists/*dic
 
 COPY --from=build /opt /opt
 WORKDIR /opt/wvp
