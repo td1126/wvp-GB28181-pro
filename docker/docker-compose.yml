@@ -30,6 +30,7 @@ services:
       - ./logs/wvp:/opt/wvp/logs/
       - ./logs/assist:/opt/assist/logs/
       - ./logs/media:/opt/media/log/
+      - ./application.yml:/opt/wvp/config/application.yml
     environment:
       TZ: "Asia/Shanghai"
       # [必须修改] 本机的IP
