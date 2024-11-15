@@ -1,18 +1,19 @@
 FROM ubuntu:20.04   as   build
 
 ARG gitUrl1="https://gitee.com/pan648540858"
-ARG gitUrl2="git@github.com:td1126"
+ARG gitUrl2="https://gitee.com/td1126"
 ARG zlmGitUrl="https://gitee.com/xia-chu/ZLMediaKit"
 
-RUN export DEBIAN_FRONTEND=noninteractive &&\
-        apt-get update && \
-        apt-get install -y --no-install-recommends openjdk-11-jre git maven nodejs npm build-essential \
-        cmake ca-certificates openssl ffmpeg &&\
-        mkdir -p /opt/wvp/config /opt/wvp/heapdump /opt/wvp/config /opt/assist/config /opt/assist/heapdump /opt/media/www/record
+#RUN export DEBIAN_FRONTEND=noninteractive &&\
+#        apt-get update && \
+#        apt-get install -y --no-install-recommends openjdk-11-jre git maven nodejs npm build-essential \
+#        cmake ca-certificates openssl ffmpeg &&\
+#        mkdir -p /opt/wvp/config /opt/wvp/heapdump /opt/wvp/config /opt/assist/config /opt/assist/heapdump /opt/media/www/record
 
 RUN cd /home && \
         git clone "${gitUrl1}/maven.git" && \
         cp maven/settings.xml /usr/share/maven/conf/
+
 
 RUN cd /home && \
         git clone "${gitUrl2}/wvp-GB28181-pro.git"
@@ -70,12 +71,12 @@ EXPOSE 30000-30500/udp
 
 ENV LC_ALL zh_CN.UTF-8
 
-RUN export DEBIAN_FRONTEND=noninteractive &&\
-        apt-get update && \
-        apt-get install -y --no-install-recommends openjdk-11-jre ca-certificates ffmpeg language-pack-zh-hans && \
-        apt-get autoremove -y && \
-        apt-get clean -y && \
-        rm -rf /var/lib/apt/lists/*dic
+#RUN export DEBIAN_FRONTEND=noninteractive &&\
+#        apt-get update && \
+#        apt-get install -y --no-install-recommends openjdk-11-jre ca-certificates ffmpeg language-pack-zh-hans && \
+#        apt-get autoremove -y && \
+#        apt-get clean -y && \
+#        rm -rf /var/lib/apt/lists/*dic
 
 COPY --from=build /opt /opt
 WORKDIR /opt/wvp
